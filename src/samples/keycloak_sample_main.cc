@@ -64,6 +64,7 @@ util::Status KeyCloakSample::Startup(int argc, char* argv[]) {
 
 
 string store_path;
+//need to set the store path for the secret JSON file generated from above to be used later for the credential store and authorization flow.
 googleapis::util::Status status= FileCredentialStoreFactory::GetSystemHomeDirectoryStorePath(&store_path);
 
 
@@ -127,7 +128,7 @@ curl=curl_easy_init();
 
 if(curl){
 
-	curl_easy_setopt(curl, CURLOPT_URL, "http://localhost:8080/auth/realms/master/protocol/openid-connect/token");
+	curl_easy_setopt(curl, CURLOPT_URL, "http://localhost:8080/auth/realms/master/protocol/openid-connect/token");//appropriate end point can be replaced
 	curl_easy_setopt(curl, CURLOPT_POST, 1);
 	curl_easy_setopt(curl, CURLOPT_POSTFIELDS, "client_id=client_account&client_secret=secret&username=user&password=password&grant_type=password");
 res=curl_easy_perform(curl);
